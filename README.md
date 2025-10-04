@@ -15,8 +15,13 @@ python -m venv .venv
 .venv\Scripts\Activate
 cd backend
 pip install -r requirements.txt
+```
+First copy the .env.example to .env and paste your key and then run
+
+```powershell 
 uvicorn main:app --reload
 ```
+
 
 The API will default to `http://127.0.0.1:8000`. Update `Backend/.env` with your model keys before calling the AI endpoint.
 
