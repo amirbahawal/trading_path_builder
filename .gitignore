@@ -7,7 +7,6 @@ Thumbs.db
 
 # Environment & secrets
 .env
-.env.*
 backend/.env
 .venv/
 venv/
