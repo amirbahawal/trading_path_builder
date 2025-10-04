@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Summary({ summary, onRestart }) {
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(summary);
-    alert("Summary copied to clipboard!");
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch (error) {
+      console.error("Copy failed:", error);
+      setCopied(false);
+    }
   };
 
   return (
-    <div className="summary-box">
-      <h2>Your Trading Path</h2>
-      <p>{summary}</p>
-      <div className="summary-actions">
-        <button onClick={copyToClipboard} className="cta-button">Copy</button>
-        <button onClick={onRestart} className="secondary-button">Generate Another</button>
+    <section className="summary-panel">
+      <div className="summary-panel__header">
+        <span className="badge badge--soft">AI Generated</span>
+        <h2>Your Trading Path</h2>
+        <p>Review the plan, keep what resonates, iterate as you grow.</p>
       </div>
-    </div>
+      <pre className="summary-text">{summary}</pre>
+      <div className="summary-actions">
+        <button onClick={copyToClipboard} className="cta-button">
+          Copy to clipboard
+        </button>
+        <button onClick={onRestart} className="secondary-button">
+          Generate another
+        </button>
+      </div>
+      <div className="copy-feedback" role="status" aria-live="polite">
+        {copied ? "Summary copied!" : ""}
+      </div>
+    </section>
   );
 }
 
