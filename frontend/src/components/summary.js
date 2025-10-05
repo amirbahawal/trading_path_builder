@@ -18,7 +18,7 @@ function Summary({ summary, onRestart }) {
     <section className="summary-panel">
       <div className="summary-panel__header">
         <span className="badge badge--soft">AI Generated</span>
-        <h2>Your Trading Path</h2>
+        <h2>Your Personalized Trading Summary</h2>
         <p>Review the plan, keep what resonates, iterate as you grow.</p>
       </div>
       <pre className="summary-text">{summary}</pre>
@@ -33,6 +33,7 @@ function Summary({ summary, onRestart }) {
       <div className="copy-feedback" role="status" aria-live="polite">
         {copied ? "Summary copied!" : ""}
       </div>
+      <p className="summary-disclaimer">Educational content only. Not financial advice.</p>
     </section>
   );
 }

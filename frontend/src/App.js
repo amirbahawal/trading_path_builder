@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import Quiz from "./components/quiz";
 import Summary from "./components/summary";
 import "./style.css";
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000";
 
 function App() {
   const [summary, setSummary] = useState("");
@@ -13,10 +14,10 @@ function App() {
   const handleQuizComplete = async (collectedAnswers) => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://127.0.0.1:8000/generate-summary", {
+      const res = await fetch(`${API_BASE_URL}/generate-summary`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers: Object.values(collectedAnswers) }),
+        body: JSON.stringify(collectedAnswers),
       });
 
       const data = await res.json();
@@ -87,7 +88,7 @@ function App() {
             {isLoading && (
               <div className="loading-overlay">
                 <div className="loading-spinner" aria-hidden />
-                <p>Composing your personalized path…</p>
+                <p>Composing your personalized pathï¿½</p>
               </div>
             )}
           </div>
@@ -99,3 +100,5 @@ function App() {
 }
 
 export default App;
+
+
